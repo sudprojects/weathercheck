@@ -45,7 +45,7 @@ class App extends Component {
   onButtonSubmit = async (e) =>{
     e.preventDefault();
     const city = e.target.elements.city.value;
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bec84f07e5892cf7f23526e832cdf46`);
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bec84f07e5892cf7f23526e832cdf46`);
     const data = await api_call.json();
     console.log(data);
     //console.log(data.main.temp);

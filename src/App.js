@@ -33,7 +33,8 @@ class App extends Component {
     city: undefined,
     temperature: undefined,
     windSpeed: undefined,
-    error: undefined
+    error: undefined,
+    country: undefined
 
   }
 
@@ -44,29 +45,42 @@ class App extends Component {
 
   onButtonSubmit = async (e) =>{
     e.preventDefault();
+
+      this.setState({
+        city: undefined,
+        temperature: undefined,
+        windSpeed: undefined,
+        error: undefined,
+        country: undefined,
+        condition: undefined
+      });
+
+
     const city = e.target.elements.city.value;
     const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bec84f07e5892cf7f23526e832cdf46`);
     const data = await api_call.json();
-    console.log(data);
+    console.log('data:', data);
     //console.log(data.main.temp);
-    if(city){
-        this.setState({
-        city:data.name,
-        temperature: data.main.temp,
-        windSpeed: data.wind.speed,
-        error: ''
-      });
-
-    }else{
+    if(data.cod != '200'){
         this.setState({
         city:undefined,
         temperature: undefined,
         windSpeed: undefined,
-        error: 'Enter values'
+        country: undefined,
+        condition: undefined,
+        error: 'Please enter a valid city name'
+      });
+
+    }else{
+        this.setState({
+        city:data.name,
+        temperature: data.main.temp,
+        windSpeed: data.wind.speed,
+        country: data.sys.country,
+        condition: data.weather[0].description,
+        error: ''
       });
     }
-
-console.log('CityName', this.state.city);
 
   }
 
@@ -79,8 +93,10 @@ console.log('CityName', this.state.city);
       <Results 
       city = {this.state.city}
       temperature = {parseInt(this.state.temperature - 273.15)}
-      windSpeed = {this.state.windSpeed}
-      error = {this.state.error}  />
+      windSpeed = {parseInt(this.state.windSpeed *4.5)}
+      error = {this.state.error}
+      country = {this.state.country}
+      condition = {this.state.condition}  />
       </div>
       );
     }

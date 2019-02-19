@@ -13,7 +13,7 @@ return (
 	
 	<form className = 'form center pa4 br3 shadow-5' onSubmit={onButtonSubmit}>
 		<input className = 'f4 pa2 w-70 center' type="text" name="city" placeholder="City..."/>
-		<button className = 'w-30 grow f4 link ph3 pv2 dib white bg-light-purple'>Get Weather</button>
+		<button className = 'w-40 grow f4 link ph3 pv2 dib white bg-light-purple'>Get Weather</button>
 	</form>
 	
 	</div>

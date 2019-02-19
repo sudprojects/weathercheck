@@ -88,7 +88,7 @@ class App extends Component {
 
       return (
       <div className="App">
-      <Particles className = 'particles' params={particleConfig} />
+      
       <Form onButtonSubmit = {this.onButtonSubmit} />
       <Results 
       city = {this.state.city}
@@ -107,3 +107,4 @@ class App extends Component {
 export default App;
 // <Results city = {this.city} /> 
 // <CitySearchForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onButtonSubmit} />
+// <Particles className = 'particles' params={particleConfig} />

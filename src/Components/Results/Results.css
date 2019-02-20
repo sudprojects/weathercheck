@@ -24,3 +24,19 @@
 	display: grid;
 	
 }
+
+@media(min-width: 900px){
+
+	
+	.myflex{
+
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	padding-left: 1%;
+
+}
+
+}

@@ -93,7 +93,7 @@ class App extends Component {
       <Results 
       city = {this.state.city}
       temperature = {parseInt(this.state.temperature - 273.15)}
-      windSpeed = {parseInt(this.state.windSpeed *4.5)}
+      windSpeed = {parseInt(this.state.windSpeed *3.6)}
       error = {this.state.error}
       country = {this.state.country}
       condition = {this.state.condition}  />

@@ -1,35 +1,23 @@
 import React, { Component } from 'react';
-import Particles from 'react-particles-js';
 import './App.css';
-import CitySearchForm from './Components/CitySearchForm/CitySearchForm';
 import Results from './Components/Results/Results';
 import Form from './Components/Form/Form';
 
 
-const particleConfig = {
-      "particles": {
-          "number": {
-              "value": 50
-          },
-          "size": {
-              "value": 3
-          }
-      },
-      "interactivity": {
-          "events": {
-              "onhover": {
-                  "enable": true,
-                  "mode": "repulse"
-              }
-          }
-      }
-  }
-
-
-const city = '';
 class App extends Component {
 
+  // Defining the state object which will be used to change values of keys in case of valid inputs
   state = {
+    city: undefined,
+    temperature: undefined,
+    windSpeed: undefined,
+    error: undefined,
+    country: undefined,
+
+  }
+
+  // Defining resetState object for resetting the keys in case of invalid input or bad response from api
+  resetState = {
     city: undefined,
     temperature: undefined,
     windSpeed: undefined,
@@ -38,39 +26,21 @@ class App extends Component {
 
   }
 
-  // onInputChange = (event) =>{
-  //   this.setState({city: event.target.value});
-  //   console.log(event.target.value);
-  // }
-
-  onButtonSubmit = async (e) =>{
+    onButtonSubmit = async (e) =>{
     e.preventDefault();
-
-      this.setState({
-        city: undefined,
-        temperature: undefined,
-        windSpeed: undefined,
-        error: undefined,
-        country: undefined,
-        condition: undefined
-      });
-
-
+    
+    //Taking input from user
     const city = e.target.elements.city.value;
+
+    //Calling api and passing the city value
     const api_call = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=1bec84f07e5892cf7f23526e832cdf46`);
     const data = await api_call.json();
     console.log('data:', data);
-    //console.log(data.main.temp);
+   
+   //Checking the api response and setting the state values
     if(data.cod != '200'){
-        this.setState({
-        city:undefined,
-        temperature: undefined,
-        windSpeed: undefined,
-        country: undefined,
-        condition: undefined,
-        error: 'Please enter a valid city name'
-      });
-
+        this.setState(this.resetState);
+        this.setState({ error: 'Please enter a valid city name'});
     }else{
         this.setState({
         city:data.name,
@@ -84,6 +54,7 @@ class App extends Component {
 
   }
 
+  //Rendering the form and result component. Props are passed to the components
   render() {
 
       return (
@@ -96,7 +67,8 @@ class App extends Component {
       windSpeed = {parseInt(this.state.windSpeed *3.6)}
       error = {this.state.error}
       country = {this.state.country}
-      condition = {this.state.condition}  />
+      condition = {this.state.condition} />
+
       </div>
       );
     }
@@ -105,6 +77,3 @@ class App extends Component {
 }
 
 export default App;
-// <Results city = {this.city} /> 
-// <CitySearchForm onInputChange = {this.onInputChange} onButtonSubmit = {this.onButtonSubmit} />
-// <Particles className = 'particles' params={particleConfig} />

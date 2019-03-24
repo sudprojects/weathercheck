@@ -1,10 +1,12 @@
 import React from 'react';
 import './Results.css'
 
+//Destructuring props
 const Results = ({ city, temperature, windSpeed, error, country, condition }) => {
 
 return (
 		
+		//returning the result element with values
 		<div className = 'myflex center bg-light-gray'>
 		{city && <img className = 'imgcss' alt ='img' src = {`https://www.countryflags.io/${country}/shiny/64.png`}  />}
 		{city && <p>City: {city}</p>}
@@ -22,9 +24,3 @@ return (
 
 export default Results;
 
-// <div className = 'flex flex-column w-34 center bg-light-gray'>
-// className = 'animated bounceInRight ani slow imgcss'
-// className = 'animated bounceInRight ani slow' 
- // className = 'animated bounceInLeft ani slow' 
- //  className = 'animated bounceInUp ani slow' 
- //   className = 'animated bounceInUp ani slow' 
